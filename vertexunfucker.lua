@@ -20,7 +20,7 @@ local function transformToBone(vert, trans_v, trans_n, weights, binds) -- specia
     end
 
     vert.pos = vf
-    vert.normal = -nf -- flip the normal since it's now inside-out
+    vert.normal = nf
 
 end
 
