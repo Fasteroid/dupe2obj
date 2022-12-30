@@ -204,7 +204,7 @@ function dupe2obj.addEntity(ent, obj, center)
             local customvert = {}
             customvert.pos    = verts:add(pos[1], pos[2], pos[3])
             customvert.normal = normals:add(norm[1], norm[2], norm[3])
-            customvert.uv     = uvs:add(vert.u, vert.v)
+            customvert.uv     = uvs:add(vert.u, 1 - vert.v) -- fix a bug?
             table.insert(tris, customvert)
 
         end
