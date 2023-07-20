@@ -28,10 +28,16 @@ local textureQueue = dupe2obj.textureQueue
 function dupe2obj.set1()
     dupe2obj.corner1 = LocalPlayer():GetEyeTrace().Entity or dupe2obj.corner1
 end
+concommand.Add("dupe2obj_setcorner1", function(ply, str, args)
+    dupe2obj.set1()
+end)
 
 function dupe2obj.set2()
     dupe2obj.corner2 = LocalPlayer():GetEyeTrace().Entity or dupe2obj.corner2
 end
+concommand.Add("dupe2obj_setcorner2", function(ply, str, args)
+    dupe2obj.set2()
+end)
 
 function dupe2obj.getFindBox()
     if not IsValid(dupe2obj.corner1) or not IsValid(dupe2obj.corner2) then return end
@@ -326,8 +332,11 @@ function dupe2obj.save(path)
     dupe2obj.savePath = "dupe2obj/" .. (path or "untitled")
 	co = coroutine.create( dupe2obj.saveInternal )
 end
+concommand.Add("dupe2obj_save", function(ply, str, args)
+    dupe2obj.save(args[1])
+end)
 
-hook.Add( "Think", "dupe2obj.save", function()
+hook.Add( "Think", "dupe2obj_save", function()
     if co then
 	    coroutine.resume(co)
     end
